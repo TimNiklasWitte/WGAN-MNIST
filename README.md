@@ -1,5 +1,6 @@
 # WGAN: Wasserstein GAN
-
+The Wasserstein GAN was implemented based on a linear activation in the discriminator (now called critic!) and a gradient penality.
+This penality term enforces the critic to be Lipschitz-continuous.
 
 ## Evaluation
 
@@ -8,7 +9,7 @@
 <img src="./plots/Loss_GradientPenality.png" width="650" height="200">
 
 ### Generated images while training
-The GAN was trained for 150 epochs:
+The WGAN was trained for 150 epochs:
 Each column represents a noise vector which is transformed by the generator into an image.
 There are ten different noise vectors.
 The i^th row represents the model's state at epoch i * 10.
