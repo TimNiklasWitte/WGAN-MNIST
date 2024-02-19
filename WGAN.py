@@ -20,16 +20,24 @@ class WGAN(tf.keras.Model):
 
         with tf.GradientTape(persistent=True) as tape:
             
+            #
+            # Gradient penality
+            #
+
             tape.watch(noise)
-            with tf.GradientTape(persistent=True) as tape1:
-                tape1.watch(noise)
+            with tf.GradientTape(persistent=True) as tape_gradient_penality:
+                tape_gradient_penality.watch(noise)
                 img_fake = self.generator(noise, training=True)
 
-            gradient = tape1.gradient(img_fake, noise)
+            gradient = tape_gradient_penality.gradient(img_fake, noise)
             gradient_norm = tf.norm(gradient, axis=-1)
 
             gradient_penality = (gradient_norm - 1)**2
             gradient_penality = tf.math.reduce_mean(gradient_penality)
+
+            #
+            # Evaluation by critic
+            #
 
             rating_fake = self.critic(img_fake, training=True)
             rating_real = self.critic(img_real, training=True)
@@ -39,6 +47,8 @@ class WGAN(tf.keras.Model):
             #
             generator_loss = tf.math.reduce_mean(rating_fake)
 
+            # Earthmover distance
+            # -> Kantorovich-Rubinstein duality
             critic_default_loss = tf.math.reduce_mean(rating_real - rating_fake)
             critic_loss =  critic_default_loss + 10* gradient_penality
 
