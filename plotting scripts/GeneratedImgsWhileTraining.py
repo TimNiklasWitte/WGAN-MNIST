@@ -7,9 +7,9 @@ def main():
 
     df = load_dataframe(log_dir)
 
-    fig, axes = plt.subplots(nrows=15, ncols=10, figsize=(7, 10))
+    fig, axes = plt.subplots(nrows=30, ncols=10, figsize=(7, 20))
 
-    for row_idx, epoch in enumerate(range(0, 150, 10)):
+    for row_idx, epoch in enumerate(range(0, 300, 10)):
         imgs = df.loc[epoch, "generated imgs"]
         for col_idx in range(10):
             img = imgs[col_idx]

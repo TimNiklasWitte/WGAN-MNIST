@@ -9,13 +9,18 @@ def main():
     df = load_dataframe(log_dir)
 
     fig, axes = plt.subplots(1, 3, figsize=(15,5))
-    
-    sns.lineplot(data=df.loc[:, ["generator loss"]], ax=axes[0], legend=None, palette=['red'])
-    axes[0].set_title("Generator loss")
 
+    df2 = df.rename(columns={'generator loss':'generator', "critic default loss": "critic"})
+    plot = sns.lineplot(data=df2.loc[:, ["generator", "critic"]], ax=axes[0], dashes=False, palette=["red", "blue"])
+    axes[0].set_title("Generator and critic loss")
+    axes[0].set_ylabel("Loss")
+    axes[0].legend(loc="upper right")
+    plot.set(ylim=(None, 2))
 
-    sns.lineplot(data=df.loc[:, ["critic default loss"]], ax=axes[1], legend=None, palette=['blue'])
-    axes[1].set_title("Critic loss")
+    df2 = df.rename(columns={'critic score img real':'real img', "critic score img fake": "fake img"})
+    sns.lineplot(data=df2.loc[:, ["real img", "fake img"]], ax=axes[1], dashes=False)
+    axes[1].set_title("Critic score")
+    axes[1].set_ylabel("Critic score")
     
     sns.lineplot(data=df.loc[:, ["critic gradient penality"]], ax=axes[2], legend=None, palette=['tab:blue'])
     axes[2].set_title("Critic gradient penality")

@@ -22,7 +22,7 @@ def main():
     gan.critic.summary()
     gan.generator.summary()
 
-    gan.load_weights(f"../saved_models/trained_weights_150").expect_partial()
+    gan.load_weights(f"../saved_models/trained_weights_300").expect_partial()
 
     noise = tf.random.normal(shape=(100, gan.generator.noise_dim))
 
