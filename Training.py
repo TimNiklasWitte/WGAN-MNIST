@@ -56,8 +56,13 @@ def main():
             
         print(f"Epoch {epoch}")
 
-        for img_real in tqdm.tqdm(train_ds, position=0, leave=True): 
-            gan.train_step(img_real)
+        for i, img_real in enumerate(tqdm.tqdm(train_ds, position=0, leave=True)): 
+
+            if i % 5 == 0:
+                gan.train_step_generator(BATCH_SIZE)
+                gan.train_step_critic(img_real)
+            else:
+                gan.train_step_critic(img_real)
 
         log(train_summary_writer, gan, noise, epoch)
 
@@ -108,7 +113,7 @@ def log(train_summary_writer, gan, noise, epoch):
  
 def prepare_data(dataset):
 
-    dataset = dataset.filter(lambda img, label: label == 0) # only '0' digits
+    #dataset = dataset.filter(lambda img, label: label == 0) # only '0' digits
 
     # Remove label
     dataset = dataset.map(lambda img, label: img)

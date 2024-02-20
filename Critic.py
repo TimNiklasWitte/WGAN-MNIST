@@ -18,6 +18,9 @@ class Critic(tf.keras.Model):
             
             tf.keras.layers.Flatten(),
 
+            # Output meaning:
+            # high <=> real
+            # low <=> fake
             tf.keras.layers.Dense(1, activation=None)
         ]
 
