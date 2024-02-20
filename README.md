@@ -17,6 +17,6 @@ The i^th row represents the model's state at epoch i * 10.
 <img src="./plots/GeneratedImgsWhileTraining.png" width="650" height="2000">
 
 ### Generated images
-Let's generate 100 images after training the GAN i.e. after 150 epochs.
+Let's generate 100 images after training the GAN i.e. after 300 epochs.
 
 <img src="./plots/GenerateImgs.png" width="650" height="650">
