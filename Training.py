@@ -5,7 +5,7 @@ import datetime
 
 from WGAN import *
 
-NUM_EPOCHS = 150
+NUM_EPOCHS = 300
 BATCH_SIZE = 32
 
 def main():
