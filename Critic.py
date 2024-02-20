@@ -28,6 +28,9 @@ class Critic(tf.keras.Model):
         self.metric_default_loss = tf.keras.metrics.Mean(name="default_loss")
         self.metric_gradient_penality = tf.keras.metrics.Mean(name="gradient_penality")
 
+        self.metric_score_img_real = tf.keras.metrics.Mean(name="score_img_real")
+        self.metric_score_img_fake = tf.keras.metrics.Mean(name="score_img_fake")
+
         self.optimizer = tf.keras.optimizers.Adam(learning_rate=0.0001)
 
     @tf.function

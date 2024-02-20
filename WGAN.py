@@ -72,6 +72,9 @@ class WGAN(tf.keras.Model):
         self.critic.metric_default_loss.update_state(critic_default_loss)
         self.critic.metric_gradient_penality.update_state(gradient_penality)
 
+        self.critic.metric_score_img_real.update_state(tf.math.reduce_mean(score_img_real))
+        self.critic.metric_score_img_fake.update_state(tf.math.reduce_mean(score_img_fake))
+
     @tf.function
     def train_step_generator(self, batch_size):
 
